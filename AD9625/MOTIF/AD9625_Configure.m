@@ -31,8 +31,8 @@
 function AD9625_Configure(m, fclk, spectrumCenter, extJitter)
 
 % Modes of Operation
-%mode = 'mode1';     % Nominal
-mode = 'mode2';    % ADC + DDC
+mode = 'mode1';     % Nominal
+%mode = 'mode2';    % ADC + DDC
 
 % Set mode specific properties
 if (strcmp(mode, 'mode1'))

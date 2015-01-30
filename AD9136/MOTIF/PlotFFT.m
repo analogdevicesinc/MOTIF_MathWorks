@@ -1,3 +1,4 @@
+
 % Copyright (c) 2014, Analog Devices Inc. 
 % All rights reserved.
 % 
@@ -28,7 +29,7 @@
 % NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 % SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-function retval = PlotFFT(h, numOfHarms, res, use_window)
+function retval = PlotFFT(h, numOfHarms, res, use_window, fs)
 
 len = length(h);
 
@@ -52,11 +53,13 @@ if (isreal(h))
     fftdata = 20 * log10(fftdata(1:len));
     xmin = 1;
     xmax = len;
+    sf = fs / (xmax -xmin) / 2;
 else
     fftdata = 20 * log10(fftdata/2);
     fftdata = [fftdata(len/2+1:len) fftdata(1:len/2)];
     xmin = -len/2;
     xmax = len/2-1;
+    sf = fs / (xmax - xmin);
 end
 
 p = 1;
@@ -86,6 +89,8 @@ end
 retval = harms;
 
 %figure;
-plot(xmin:xmax, fftdata);
-axis([xmin xmax -130 6]);
+plot((xmin:xmax)*sf, fftdata);
+axis([xmin*sf xmax*sf -130 6]);
+xlabel('Frequency (Hz)');
+ylabel('Amplitude (dB)');
 

@@ -104,7 +104,7 @@ codes = round(amplitude * exp(1i * 2 * pi * frequency * n / numOfSamples) + bias
 
 % Run the model
 [sinewave, interface] = m.runSamples(codes);
-
+interface.out.f
 % Trim the output data to ignore startup transients
 sinewave = sinewave(latency*interface.r+1:numOfSamples*interface.r+latency*interface.r);
 
@@ -121,7 +121,7 @@ nHarmonics = 2;
 useHann = true;
 complexOut = false;
 sinewave = real(sinewave) + 1j * imag(sinewave) * complexOut;
-harms = PlotFFT(sinewave, nHarmonics, 1, useHann);
+harms = PlotFFT(sinewave, nHarmonics, 1, useHann, interface.out.f);
 
 % Display DC, fundamental, and harmonic information (only accurate when
 %   useHann is false)

@@ -31,7 +31,7 @@
 % Simulation parameters
 % NOTE: Product configuration is found in AD9625_Configuration.m
 spectrumLevel_dB = -1;
-fclk = 2.5e9;
+fclk = 250e6;
 numOfSamples = 2^16;
 latency = 1024;
     
@@ -88,7 +88,7 @@ codes = codes(latency*interface.r+1:numOfSamples*interface.r+latency*interface.r
 % Take the FFT
 nHarmonics = 2;
 useHann = false;
-harms = PlotFFT(codes, nHarmonics, nBits, useHann);
+harms = PlotFFT(codes, nHarmonics, nBits, useHann, interface.out.f);
 
 % Display DC, fundamental, and harmonic information (only accurate when
 %   useHann is false)

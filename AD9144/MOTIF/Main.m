@@ -119,9 +119,9 @@ sinewave = (sinewave - bias) / (inputSpan / 2);
 % Take the FFT
 nHarmonics = 2;
 useHann = true;
-complexOut = true;
+complexOut = false;
 sinewave = real(sinewave) + 1j * imag(sinewave) * complexOut;
-harms = PlotFFT(sinewave, nHarmonics, 1, useHann);
+harms = PlotFFT(sinewave, nHarmonics, 1, useHann, interface.out.f);
 
 % Display DC, fundamental, and harmonic information (only accurate when
 %   useHann is false)

@@ -28,7 +28,7 @@
 % NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 % SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-function retval = PlotFFT(h, numOfHarms, res, use_window)
+function retval = PlotFFT(h, numOfHarms, res, use_window, fs)
 
 len = length(h);
 
@@ -58,6 +58,7 @@ else
     xmin = -len/2;
     xmax = len/2-1;
 end
+sf = fs / len / 2;
 
 p = 1;
 max = fftdata(1);
@@ -86,6 +87,8 @@ end
 retval = harms;
 
 %figure;
-plot(xmin:xmax, fftdata);
-axis([xmin xmax -130 6]);
+plot((xmin:xmax)*sf, fftdata);
+axis([xmin*sf xmax*sf -130 6]);
+xlabel('Frequency (Hz)');
+ylabel('Amplitude (dB)');
 
