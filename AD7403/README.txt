@@ -53,6 +53,11 @@ Troubleshoot:
   If MATLAB complains that a compiler has not been selected, type "mex -setup" and follow the instrustions.
   Rerun Main.m
   
+  If MATLAB complains that there is a problem with loadlibrary, it might be an issue with having
+  a valid supported C compiler.  In Windows, MATLAB doesn't work with Microsoft Visual Studio 2010
+  Redistributables.  You will need to uninstall any references to VS 2010 Redistributable and 
+  install the Windows SDK 7.1.
+
   For support or questions, please use EngineerZone (ez.analog.com)
  
   
