@@ -1,3 +1,4 @@
+
 % Copyright (c) 2014, Analog Devices Inc. 
 % All rights reserved.
 % 
@@ -39,7 +40,7 @@
 % conditions, or to simulate this model within a larger design.
 
 % Simulation parameters
-% NOTE: Product configuration is found in AD9680_Configuration.m
+% NOTE: Product configuration is found in AD9144_Configuration.m
 spectrumLevel_dB = -0.1;
 fdata = 1.06e9;  % Data rate (in Hz)
                  % Constraints (adjust l in AD9144_Config.m):
@@ -119,7 +120,7 @@ sinewave = (sinewave - bias) / (inputSpan / 2);
 % Take the FFT
 nHarmonics = 2;
 useHann = true;
-complexOut = false;
+complexOut = true;
 sinewave = real(sinewave) + 1j * imag(sinewave) * complexOut;
 harms = PlotFFT(sinewave, nHarmonics, 1, useHann, interface.out.f);
 

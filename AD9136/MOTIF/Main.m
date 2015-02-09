@@ -39,7 +39,7 @@
 % conditions, or to simulate this model within a larger design.
 
 % Simulation parameters
-% NOTE: Product configuration is found in AD9680_Configuration.m
+% NOTE: Product configuration is found in AD9136_Configuration.m
 spectrumLevel_dB = -0.1;
 fdata = 1.06e9;  % Data rate (in Hz)
                  % Constraints (adjust l in AD9136_Config.m):
@@ -104,7 +104,7 @@ codes = round(amplitude * exp(1i * 2 * pi * frequency * n / numOfSamples) + bias
 
 % Run the model
 [sinewave, interface] = m.runSamples(codes);
-interface.out.f
+
 % Trim the output data to ignore startup transients
 sinewave = sinewave(latency*interface.r+1:numOfSamples*interface.r+latency*interface.r);
 

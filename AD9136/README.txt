@@ -29,12 +29,12 @@
 % SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 Description:
-  Model   AD9680_1000.pmf
+  Model   AD9136.pmf
   DLL     MOTIF.dll or libMOTIF.so
   Arch    64-bit
-  Version 1.0.0.6
+  Version 1.0.0.15
   
-  This code simulates operation of the AD9680.  The simulation generates a tone, passes it 
+  This code simulates operation of the AD9136.  The simulation generates a tone, passes it 
   through a model of the device, and takes an FFT of the results.  It also allows the user
   to configure some digital features of the device.  Feel free to modify the code to suit
   your application.
@@ -43,8 +43,18 @@ Install:
   Unzip the contents into some working folder.
   
 Usage:
+  From Simulink, open AD9136.slx and run.  Edit the mask to change the device under simulation. 
+  The simulation uses frames, so it has to be Sample based.
+
+  To change the simulation/model conditions, navigate to the Model Properties | Callbacks | InitFcn Callbacks
+    (File > Model Properties > Model Properties)
+
+  Under the AD9136 Mask, you can change the Output Configuration. 
+    Normalized, where the output is normalize to be between -1 and 1.
+    Absolute, where the output is in absolute current.
+  
   From the MATLAB shell, run Main.m by typing "Main" (it may prompt you to change directories)
-  To change the behavior of the model modify AD9680_Configuration.m, save, and rerun Main.
+  To change the behavior of the model modify AD9136_Configuration.m, save, and rerun Main.
 
 Troubleshoot:
   If MATLAB complains that a compiler has not been selected, type "mex -setup" and follow the instrustions.

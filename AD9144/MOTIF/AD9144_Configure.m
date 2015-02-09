@@ -41,7 +41,6 @@ pnmask = '1E0,-70,1E1,-96,1E2,-115,1E3,-135,1E4,-140,5E4,-140,2E5,-165,1E9,-165'
     
 l = 2;                      % Interpolation {1,2,4,8}
 nco_freq = 0;               % NCO Frequency (in Hz)
-nco_phase = 0;              % NCO Phase [0,360] (in deg)
 invsinc_enabled = false;    % Enable for inverse sinc.
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -59,6 +58,5 @@ m.setProp('GLOBAL', 'OSR', num2str(OSR));
 m.setProp('settings', 'pnmask', pnmask);
 m.setProp('settings', 'l', num2str(l));
 m.setProp('nco', 'freq', num2str(nco_freq));
-m.setProp('nco', 'phaseoff', num2str(nco_phase));
 m.setProp('invsinc', 'enabled', num2str(invsinc_enabled));
 
