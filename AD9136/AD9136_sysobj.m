@@ -42,7 +42,7 @@ classdef AD9136_sysobj < matlab.System & ...
         Mode = 'Nominal';
         
         % Interpolation
-        Interpolation = 1;
+        Interpolation = '1';
         
         % Data Frequency
         Fdata = 2120e6;
@@ -65,9 +65,8 @@ classdef AD9136_sysobj < matlab.System & ...
     
     properties(Constant, Hidden)
         ModeSet = matlab.system.StringSet({'Nominal'});
-        
+        InterpolationSet = matlab.system.StringSet({'1', '2', '4', '8'});
         InvSincSet = matlab.system.StringSet({'Disabled', 'Enabled'});
-
         OutputConfigSet = matlab.system.StringSet({'Normalized', 'Absolute'});
     end
     
@@ -78,7 +77,9 @@ classdef AD9136_sysobj < matlab.System & ...
             % object.
             
             % Add MOTIF path
-            modelPath = get_param(gcs,'FileName');
+            x = gcb;
+            y = gcs;
+            modelPath = get_param(gcb, 'FileName');
             modelFolder = fileparts(modelPath);
             resourcesFolder = fullfile(modelFolder, 'MOTIF');
             addpath(resourcesFolder);
@@ -99,10 +100,7 @@ classdef AD9136_sysobj < matlab.System & ...
     methods (Access = protected)
         %% Common functions
         function validatePropertiesImpl(obj)
-            if obj.Interpolation ~= 1 && obj.Interpolation ~= 2 ...
-                && obj.Interpolation ~= 4 && obj.Interplation ~= 8
-                error('Interpolation must be one of: {1,2,4,8}');
-            end
+
         end
         
         function setupImpl(obj)
@@ -116,7 +114,7 @@ classdef AD9136_sysobj < matlab.System & ...
             end
             
             % Set the interpolation property
-            obj.pm.setProp('settings', 'l', num2str(obj.Interpolation));
+            obj.pm.setProp('settings', 'l', obj.Interpolation);
             
             % Get maximum sampling rate, and coerce if necessary
             clkmax = str2double(obj.pm.getProp('settings', 'clkmax'));
@@ -187,7 +185,7 @@ classdef AD9136_sysobj < matlab.System & ...
         end
 
         function sizeout = getOutputSizeImpl(obj)
-            sizeout = obj.Interpolation;
+            sizeout = str2double(obj.Interpolation);
         end
 
         function cplxout = isOutputComplexImpl(obj)
