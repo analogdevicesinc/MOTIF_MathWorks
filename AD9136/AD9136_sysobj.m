@@ -39,7 +39,7 @@ classdef AD9136_sysobj < matlab.System & ...
    
     properties
         % Operating Mode
-        Mode = 'Nominal';
+        %Mode = 'Nominal';
         
         % Interpolation
         Interpolation = '1';
@@ -64,10 +64,10 @@ classdef AD9136_sysobj < matlab.System & ...
     end
     
     properties(Constant, Hidden)
-        ModeSet = matlab.system.StringSet({'Nominal'});
-        InterpolationSet = matlab.system.StringSet({'1', '2', '4', '8'});
-        InvSincSet = matlab.system.StringSet({'Disabled', 'Enabled'});
-        OutputConfigSet = matlab.system.StringSet({'Normalized', 'Absolute'});
+        %ModeSet = matlab.system.StringSet({'Nominal'});
+        %InterpolationSet = matlab.system.StringSet({'1', '2', '4', '8'});
+        %InvSincSet = matlab.system.StringSet({'Disabled', 'Enabled'});
+        %OutputConfigSet = matlab.system.StringSet({'Normalized', 'Absolute'});
     end
     
     methods
@@ -75,15 +75,6 @@ classdef AD9136_sysobj < matlab.System & ...
         function obj = AD9136_sysobj(varargin)
             % Support name-value pair arguments when constructing the
             % object.
-            
-            % Add MOTIF path
-            x = gcb;
-            y = gcs;
-            modelPath = get_param(gcb, 'FileName');
-            modelFolder = fileparts(modelPath);
-            resourcesFolder = fullfile(modelFolder, 'MOTIF');
-            addpath(resourcesFolder);
-            
             setProperties(obj,nargin,varargin{:});
         end
     end
@@ -191,11 +182,11 @@ classdef AD9136_sysobj < matlab.System & ...
         function cplxout = isOutputComplexImpl(obj)
             % This should solicit the complexity from the model,
             %  but the model hasn't been loaded yet.
-            if strcmp(obj.Mode, 'Nominal')
-                cplxout = true; 
-            else
-                cplxout = false;
-            end
+            %if strcmp(obj.Mode, 'Nominal')
+            cplxout = true; 
+            %else
+            %    cplxout = false;
+            %end
         end
 
         function fixedout = isOutputFixedSizeImpl(~)

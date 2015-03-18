@@ -85,7 +85,7 @@ codes = codes(latency+1:numOfSamples*r+latency);
 %Take the FFT
 nHarmonics = 2;
 useHann = true;
-harms = PlotFFT(codes, nHarmonics, nBits, useHann);
+harms = PlotFFT(codes, nHarmonics, nBits, useHann, interface_sinc.out.f);
 
 % Display DC, fundamental, and harmonic information (only accurate when
 %   useHann is false)

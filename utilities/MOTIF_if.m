@@ -50,43 +50,17 @@ classdef MOTIF_if < handle
 
             % Check to see if the library is loaded already
             if (~libisloaded('MOTIF'))
-                dllpath = [pwd filesep library_name];
-                if ~exist(dllpath, 'file')
-                    dllpath = [pwd filesep 'bin' filesep library_name];
-                    if ~exist(dllpath, 'file')
-                        dllpath = [pwd filesep 'MOTIF' filesep 'bin' filesep library_name];
-                        if ~exist(dllpath, 'file')
-                            uiwait(msgbox(['Error: cannot locate MOTIF library: ' library_name]));
-                            return;
-                        end
-                    end
-                end
-
-                headerpath = [pwd filesep 'MOTIF.h'];
-                if ~exist(headerpath, 'file')
-                    headerpath = [pwd filesep 'bin' filesep 'MOTIF.h'];
-                    if ~exist(headerpath, 'file')
-                        headerpath = [pwd filesep 'MOTIF' filesep 'bin' filesep 'MOTIF.h'];
-                        if ~exist(headerpath, 'file')
-                            uiwait(msgbox('Error: cannot locate MOTIF.h'));
-                            return;
-                        end
-                    end
-                end    
-
-                loadlibrary(dllpath, headerpath, 'alias', 'MOTIF');
+                loadlibrary(library_name, 'MOTIF.h', 'alias', 'MOTIF');
             end
 
             % Try and resolve absolute path
-            tf = [pwd filesep filename];
-            if exist(tf, 'file')
-              filename = tf;
-            else
-               tf = [pwd filesep 'MOTIF' filesep filename];
+            if ~exist(filename, 'file')
+               tf = ['MOTIF' filesep filename];
                if exist(tf, 'file')
                   filename = tf;
                else
-                   % Assume filename is already absolute
+                   error_msg = sprintf('Cannot find model: %s', filename);
+                   error(error_msg);
                end
             end
             
